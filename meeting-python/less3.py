@@ -35,7 +35,7 @@ def make_letter(website, friend_name, my_name):
     body = "\r\n".join((f'From: {email_from}', f'To: {email_to}',
                        f'Subject: {subject}', charset, "", message))
     letter = body.encode('utf-8')
-    return (letter)
+    return letter
 
 
 letter = make_letter(website, friend_name, my_name)
