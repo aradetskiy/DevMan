@@ -25,7 +25,7 @@ def shadow_image(im, count_move, im_width, im_height, unvisibility_shadow):
 
 # count_move_shadow -  count pixel to move shadow.
 # If you want move shadow right you should choose positive integer number
-# If you want move shadow left you should choose negtive integer number
+# If you want move shadow left you should choose negаtive integer number
 
 
 count_move_shadow = 10
