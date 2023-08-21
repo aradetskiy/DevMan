@@ -20,6 +20,6 @@ green_crop_coordinates = (shift, 0, green.width-shift, green.height)
 green_new = green.crop(green_crop_coordinates)
 
 new_img = Image.merge('RGB', (red_new, green_new, blue_new))
-# remove('meeting-python\monro.jpg')
+remove('meeting-python\monro.jpg')
 new_img.thumbnail((80, 80))
 new_img.save('meeting-python\\avatar.jpg')
