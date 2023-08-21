@@ -1,50 +1,25 @@
 from PIL import Image
 from os import remove
 
-img = Image.open('meeting-python\\monro.jpg')
-img_rgb = img.convert('RGB')
-red, green, blue = img_rgb.split()
-remove('meeting-python\\monro.jpg')
+img = Image.open('meeting-python\monro.jpg')
+red, green, blue = img.split()
+shift = 20
+red_shift_coordinates_left = (int(shift*2), 0, red.width, red.height)
+red_shift_left = red.crop(red_shift_coordinates_left)
+red_shift_coordinates_medium = (shift, 0, red.width-shift, red.height)
+red_shift_medium = red.crop(red_shift_coordinates_medium)
+red_new = Image.blend(red_shift_medium, red_shift_left, 0.7)
 
+blue_shift_coordinates_right = (0, 0, int(blue.width-shift*2), blue.height)
+blue_shift_right = blue.crop(blue_shift_coordinates_right)
+blue_shift_coordinates_medium = (shift, 0, blue.width-shift, blue.height)
+blue_shift_medium = blue.crop(blue_shift_coordinates_medium)
+blue_new = Image.blend(blue_shift_medium, blue_shift_right, 0.7)
 
-def shadow_image(img, count_shift, img_width, img_height, unvisibility_shadow):
-    if count_shift > 0:
-        img_coord_right = (0, 0, img_width - int(count_shift*2), img_height)
-        img_right = img.crop(img_coord_right)
-        img_coord_medium = (count_shift, 0, img_width-count_shift, img_height)
-        img_medium = img.crop(img_coord_medium)
-        img_new = Image.blend(img_medium, img_right, unvisibility_shadow)
-    else:
-        count_shift = abs(count_shift)
-        img_coord_left = (int(count_shift*2), 0, img_width, img_height)
-        img_left = img.crop(img_coord_left)
-        img_coord_medium = (count_shift, 0, int(img_width-count_shift), img_height)
-        img_medium = img.crop(img_coord_medium)
-        img_new = Image.blend(img_medium, img_left, unvisibility_shadow)
-    return img_new
+green_crop_coordinates = (shift, 0, green.width-shift, green.height)
+green_new = green.crop(green_crop_coordinates)
 
-# count_shift_shadow -  count pixel to move shadow.
-# If you want move shadow right you should choose positive integer number
-# If you want move shadow left you should choose negаtive integer number
-
-
-count_shift_shadow = 10
-# if want increase visibility shadow you should decrease unvisibility_shadow
-unvisibility_shadow = 0.7
-
-monro_red_new = shadow_image(
-    red, count_shift_shadow, red.width, red.height, unvisibility_shadow)
-
-monro_blue_new = shadow_image(
-    blue, -count_shift_shadow, blue.width, blue.height, unvisibility_shadow)
-
-coord_monro_green_new = (count_shift_shadow, 0, int(
-    green.width-count_shift_shadow), green.height)
-monro_green_new = green.crop(coord_monro_green_new)
-
-
-monro_shadow = Image.merge(
-    'RGB', (monro_red_new, monro_blue_new, monro_green_new))
-
-monro_shadow.thumbnail((80, 80))
-monro_shadow.save('meeting-python\\monro_avatar.jpg')
+new_img = Image.merge('RGB', (red_new, green_new, blue_new))
+# remove('meeting-python\monro.jpg')
+new_img.thumbnail((80, 80))
+new_img.save('meeting-python\\avatar.jpg')
