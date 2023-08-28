@@ -4,12 +4,11 @@ from random import randint, sample
 from codecs import open
 
 
-
-def get_skills():
+def make_skills():
     file = open('meeting-python\src\skills.txt', 'r', 'utf-8',)
     file_skills = file.readlines()
     file.close()
-    letters_mapping =  {
+    letters_mapping = {
         'а': 'а͠', 'б': 'б̋', 'в': 'в͒͠',
         'г': 'г͒͠', 'д': 'д̋', 'е': 'е͠',
         'ё': 'ё͒͠', 'ж': 'ж͒', 'з': 'з̋̋͠',
@@ -34,19 +33,16 @@ def get_skills():
         'Э': 'Э͒͠͠', 'Ю': 'Ю̋͠', 'Я': 'Я̋',
         ' ': ' '
     }
-    
+
     for line in file_skills:
-        new_line = line
         for key, volue in letters_mapping.items():
-            new_line = new_line.replace(key,volue)
-        skills.append(new_line)
-    npc_skills = sample(skills, 3)
-    return npc_skills
+            line = line.replace(key, volue)
+        skills.append(line)
 
 
 def make_card_npc():
     fake = Faker('ru_RU')
-    npc_skills = get_skills()
+    npc_skills = sample(skills, 3)
     context = {
         'first_name': fake.first_name(),
         'last_name': fake.last_name(),
@@ -67,6 +63,7 @@ def make_card_npc():
 
 
 def main():
+    make_skills()
     make_card_npc()
 
 
