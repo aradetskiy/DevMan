@@ -4,6 +4,7 @@ from random import randint, sample
 from codecs import open
 
 
+
 def make_skills():
     file = open('meeting-python\src\skills.txt', 'r', 'utf-8',)
     file_skills = file.readlines()
