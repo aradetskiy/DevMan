@@ -34,12 +34,8 @@ def get_skills():
         'Э': 'Э͒͠͠', 'Ю': 'Ю̋͠', 'Я': 'Я̋',
         ' ': ' '
     }
-    skills = []
+    
     for line in file_skills:
-        for letter in line:
-            for key, value in letters_mapping.items():
-                line.replace()    
-            pass
         skills.append(line)
     npc_skills = sample(skills, 3)
     return npc_skills
@@ -72,4 +68,5 @@ def main():
 
 
 if __name__ == '__main__':
+    skills = []
     main()
