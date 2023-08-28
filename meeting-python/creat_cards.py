@@ -36,7 +36,10 @@ def get_skills():
     }
     
     for line in file_skills:
-        skills.append(line)
+        new_line = line
+        for key, volue in letters_mapping.items():
+            new_line = new_line.replace(key,volue)
+        skills.append(new_line)
     npc_skills = sample(skills, 3)
     return npc_skills
 
