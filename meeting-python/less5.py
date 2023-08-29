@@ -1,6 +1,7 @@
 from file_operations import render_template
 from faker import Faker
 from random import randint, sample
+from os import path
 
 
 fake = Faker('ru_RU')
@@ -110,8 +111,8 @@ def main():
             'skill_2': random_skils[1],
             'skill_3': random_skils[2],
         }
-        render_template('meeting-python\\src\\charsheet.svg',
-                        f'meeting-python\\Repl\\{context["first_name"]}_{context["last_name"]}_charsheet.svg', context)
+        render_template(path.join('meeting-python','src','charsheet.svg'),
+                        path.join('meeting-python','Repl',f'{context["first_name"]}_{context["last_name"]}_charsheet.svg'), context)
 
 
 if __name__ == '__main__':
