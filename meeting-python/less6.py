@@ -2,7 +2,7 @@ from re import findall
 
 
 def has_digit(password):
-    if findall(r'[0-9]', password):
+    if findall(r'\d', password):
         return True
     else:
         return False
