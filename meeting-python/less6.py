@@ -2,10 +2,11 @@ from re import findall
 
 
 def has_digit(password):
-    if findall(r'[0-9]',password):
+    if findall(r'[0-9]', password):
         return True
     else:
         return False
+
 
 def is_very_long(password):
     if len(password) > 12:
@@ -13,13 +14,17 @@ def is_very_long(password):
     else:
         return False
 
+
+def coint_score(password):
+    count = (has_digit(password) + is_very_long(password))*2
+    return count
+
+
 def main():
     inp_pass = input('Введите пароль: ')
-    print(is_very_long(inp_pass))
-    print(has_digit(inp_pass))
 
-    
-    
+    score = coint_score(inp_pass)
+    print(f'Рейтинг пароля - {score}')
 
 
 if __name__ == '__main__':
