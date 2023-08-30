@@ -1,17 +1,25 @@
 from re import findall
 
+
+def has_digit(password):
+    if findall(r'[0-9]',password):
+        return True
+    else:
+        return False
+
+def is_very_long(password):
+    if len(password) > 12:
+        return True
+    else:
+        return False
+
 def main():
     inp_pass = input('Введите пароль: ')
-    if len(inp_pass) > 12:
-        print('Длинный')
-    else:
-        print('Короткий')
+    print(is_very_long(inp_pass))
+    print(has_digit(inp_pass))
+
     
-   
-    if findall(r'[0-9]',inp_pass):
-        print('есть цифра')
-    else:
-        print('Нет цифры')
+    
 
 
 if __name__ == '__main__':
