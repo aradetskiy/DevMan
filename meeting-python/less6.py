@@ -1,6 +1,11 @@
 from re import findall
 
-
+def has_symbol(password):
+    if not password.isalnum():
+        return True
+    else:
+        return False
+    
 def has_digit(password):
     if findall(r'\d', password):
         return True
@@ -36,17 +41,16 @@ def is_very_long(password):
         return False
 
 
-def coint_score(password):
-    count = (has_digit(password) + is_very_long(password) +
-             has_letters(password) + has_upper_letters(password)+ has_lower_letters(password))*2
-    return count
-
 
 def main():
     inp_pass = input('Введите пароль: ')
 
-    score = coint_score(inp_pass)
-    print(f'Рейтинг пароля - {score}')
+    check_functions = [is_very_long,has_lower_letters,has_upper_letters,has_letters,has_digit,has_symbol]
+    rate_pass = 0
+    for funct in check_functions:
+        rate_pass += funct(inp_pass)*2
+    
+    print(f'Рейтинг пароля - {rate_pass}')
 
 
 if __name__ == '__main__':
