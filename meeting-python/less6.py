@@ -15,6 +15,20 @@ def has_letters(password):
         return False
 
 
+def has_upper_letters(password):
+    if findall(r'[A-ZА-ЯЁ]', password):
+        return True
+    else:
+        return False
+
+
+def has_lower_letters(password):
+    if findall(r'[a-zа-яё]', password):
+        return True
+    else:
+        return False
+
+
 def is_very_long(password):
     if len(password) > 12:
         return True
@@ -24,7 +38,7 @@ def is_very_long(password):
 
 def coint_score(password):
     count = (has_digit(password) + is_very_long(password) +
-             has_letters(password))*2
+             has_letters(password) + has_upper_letters(password)+ has_lower_letters(password))*2
     return count
 
 
