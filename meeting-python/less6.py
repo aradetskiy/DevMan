@@ -1,5 +1,5 @@
 from re import findall
-from msvcrt import getwch
+from msvcrt import getwch, getch
 
 
 def has_symbol(password):
@@ -45,21 +45,22 @@ def is_very_long(password):
 
 
 def input_pass():
-    print('Введите пароль: ', end='')
+    print('Введите пароль: ', end='',flush=True)
     password = []
     while 1:
         current_char = getwch()
         if current_char != '\r':
             password.append(str(current_char))
-            print('*',end='')
+            print('*', end='',flush= True)
         else:
-            print('')
+            print('',end='\n')
             break
     password = ''.join(password)
     return password
 
 
 def main():
+
     inp_pass = input_pass()
     check_functions = [is_very_long, has_lower_letters,
                        has_upper_letters, has_letters, has_digit, has_symbol]
