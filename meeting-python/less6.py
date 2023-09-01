@@ -1,5 +1,6 @@
 from re import findall
-from msvcrt import getwch, getch
+from msvcrt import getwch
+
 
 
 def has_symbol(password):
@@ -50,8 +51,14 @@ def input_pass():
     while 1:
         current_char = getwch()
         if current_char != '\r':
-            password.append(str(current_char))
-            print('*', end='',flush= True)
+            if current_char == '\x08':  # разобраться с процессм затирания  символов пароля
+                if password:
+                    print('\u001b[1D')
+                    # вместо поледней звездочки рисуется квадратик
+                    password = password[-1] # удаляется последнее значение из списка
+            else:
+                password.append(str(current_char))
+                print('*', end='',flush= True)
         else:
             print('',end='\n')
             break
