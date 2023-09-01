@@ -1,11 +1,14 @@
 from re import findall
+from msvcrt import getwch
+
 
 def has_symbol(password):
     if not password.isalnum():
         return True
     else:
         return False
-    
+
+
 def has_digit(password):
     if findall(r'\d', password):
         return True
@@ -41,15 +44,29 @@ def is_very_long(password):
         return False
 
 
+def input_pass():
+    print('Введите пароль: ', end='')
+    password = []
+    while 1:
+        current_char = getwch()
+        if current_char != '\r':
+            password.append(str(current_char))
+            print('*',end='')
+        else:
+            print('')
+            break
+    password = ''.join(password)
+    return password
+
 
 def main():
-    inp_pass = input('Введите пароль: ')
-
-    check_functions = [is_very_long,has_lower_letters,has_upper_letters,has_letters,has_digit,has_symbol]
+    inp_pass = input_pass()
+    check_functions = [is_very_long, has_lower_letters,
+                       has_upper_letters, has_letters, has_digit, has_symbol]
     rate_pass = 0
     for funct in check_functions:
         rate_pass += funct(inp_pass)*2
-    
+
     print(f'Рейтинг пароля - {rate_pass}')
 
 
