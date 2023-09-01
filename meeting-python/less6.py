@@ -51,11 +51,11 @@ def input_pass():
     while 1:
         current_char = getwch()
         if current_char != '\r':
-            if current_char == '\x08':  # разобраться с процессм затирания  символов пароля
+            if current_char == '\x08':  # разобраться с отображением затирания  символов пароля
                 if password:
-                    print('\u001b[1D')
-                    # вместо поледней звездочки рисуется квадратик
-                    password = password[-1] # удаляется последнее значение из списка
+                    #print('\u001b[1D')
+                    
+                    password = password[:-1] 
             else:
                 password.append(str(current_char))
                 print('*', end='',flush= True)
