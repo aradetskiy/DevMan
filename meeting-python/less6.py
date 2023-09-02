@@ -1,5 +1,6 @@
 from re import findall
 from msvcrt import getwch
+from pyautogui import press,write
 
 
 
@@ -51,10 +52,11 @@ def input_pass():
     while 1:
         current_char = getwch()
         if current_char != '\r':
-            if current_char == '\x08':  # разобраться с отображением затирания  символов пароля
+            if current_char == '\x08':  
                 if password:
-                    #print('\u001b[1D')
-                    
+                    print('\u001b[1D',end='')
+                    print('\u25AF ',end='',flush=True)
+                    print('\u001b[2D',end='')
                     password = password[:-1] 
             else:
                 password.append(str(current_char))
