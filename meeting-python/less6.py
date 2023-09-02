@@ -1,6 +1,6 @@
 from re import findall
 from msvcrt import getwch
-from pyautogui import press,write
+
 
 
 
@@ -46,8 +46,18 @@ def is_very_long(password):
         return False
 
 
+def check_functions(password):
+    check_functions = [is_very_long, has_lower_letters,
+                       has_upper_letters, has_letters, has_digit, has_symbol]
+    rate_pass = 0
+    for funct in check_functions:
+        rate_pass += funct(password)*2
+    return rate_pass
+    
+    
+    
 def input_pass():
-    print('Введите пароль: ', end='',flush=True)
+    print('Введите  пароль:  ', end='',flush=True)
     password = []
     while 1:
         current_char = getwch()
@@ -56,11 +66,20 @@ def input_pass():
                 if password:
                     print('\u001b[1D',end='')
                     print('\u25AF ',end='',flush=True)
-                    print('\u001b[2D',end='')
+                    print('\u001b[1D',end='')
                     password = password[:-1] 
             else:
                 password.append(str(current_char))
                 print('*', end='',flush= True)
+                # Здесь будет подсчет рейтинга 
+                rate_pass = check_functions(''.join(password))
+                print('')
+                print(f'Рейтинг пароля - {rate_pass}',end='')
+                step_cursor = len(password)
+                print(' '*step_cursor,end='')
+                print('\u001b[1A',end='')
+                
+
         else:
             print('',end='\n')
             break
@@ -69,15 +88,9 @@ def input_pass():
 
 
 def main():
-
-    inp_pass = input_pass()
-    check_functions = [is_very_long, has_lower_letters,
-                       has_upper_letters, has_letters, has_digit, has_symbol]
-    rate_pass = 0
-    for funct in check_functions:
-        rate_pass += funct(inp_pass)*2
-
-    print(f'Рейтинг пароля - {rate_pass}')
+    
+    input_pass()
+    
 
 
 if __name__ == '__main__':
